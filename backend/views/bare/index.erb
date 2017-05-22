@@ -1,0 +1,15 @@
+<h2>LOG</h2>
+
+<ul>
+  <% @repo.log.each do |log| %>
+    <li> <%= log.message %> </li>
+  <% end %>
+</ul>
+
+<h2>Branches</h2>
+
+<ul>
+  <% @repo.branches.each do |branch| %>
+    <li> <%= branch.name %> </li>
+  <% end %>
+</ul>
