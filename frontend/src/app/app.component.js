@@ -10,6 +10,7 @@ export class AppComponent {
   name = 'Angular'
 
   constructor() {
-    this.message = "Yea! This is cool!";
+    this.message = "Yea! This is cool!"
   }
+
 }

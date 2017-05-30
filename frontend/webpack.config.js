@@ -49,6 +49,9 @@ module.exports = {
   devServer: {
     contentBase: "./dist",
     historyApiFallback: true,
+    proxy: {
+			"/api": "http://127.0.0.1:9292",
+		},
     //hot: true,
     overlay: {
       errors: true

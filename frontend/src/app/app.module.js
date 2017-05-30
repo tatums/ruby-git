@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core'
-import { BrowserModule } from '@angular/platform-browser'
-import { AppComponent } from './app.component'
-
+import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router'
+import { FormsModule }   from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser'
 
-import { HomeComponent } from './home/component'
-import { AboutComponent } from './about/component'
+import { AppComponent } from './app.component'
+import { HomeComponent } from './home'
+import { EditComponent } from './edit'
+import { IdResolver } from './resolvers/id-resolver'
 
 const appRoutes = [
   {
@@ -13,21 +15,27 @@ const appRoutes = [
     component: HomeComponent,
   },
   {
-    path: 'about',
-    component: AboutComponent,
+    path: 'edit/:id',
+    component: EditComponent,
+    resolve: {
+      id: IdResolver
+    }
   },
 ]
 
 @NgModule({
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
   declarations: [
     AppComponent,
     HomeComponent,
-    AboutComponent
+    EditComponent
   ],
+  providers: [ IdResolver ],
   bootstrap: [ AppComponent ]
 })
 

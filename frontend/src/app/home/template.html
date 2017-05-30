@@ -1,1 +1,22 @@
 <h1>HOME</h1>
+
+<ul *ngIf="repo">
+  <li *ngFor="let branch of repo.branches">
+    <a routerLink="/edit/{{branch}}" routerLinkActive="active">Edit</a>
+    {{branch}}
+  </li>
+</ul>
+
+<ul *ngIf="repo">
+  <li *ngFor="let message of repo.log" >
+    {{message.objectish}}
+    {{message.author.date}}
+    {{message.author.name}}
+    {{message.author.email}}
+    {{message.message}}
+  </li>
+</ul>
+
+<code>
+  {{repo | json}}
+</code>

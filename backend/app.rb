@@ -7,6 +7,8 @@ require "pry"
 
 require_relative "login"
 require_relative "api"
+require_relative "api"
+require_relative "serializers/repo"
 
 REPOSITORY = "ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/my-first-code-commit-repo"
 GIT_DIR = "my-first-code-commit-repo.git"
@@ -15,18 +17,11 @@ class App < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
-  enable :sessions
   register Sinatra::Namespace
 
   use Login
 
   use Api
-
-  before do
-    unless session['user_name']
-      halt "Access denied, please <a href='/login'>login</a>."
-    end
-  end
 
   get '/' do
     erb :index
@@ -35,7 +30,7 @@ class App < Sinatra::Base
   namespace "/clone" do
 
     def get_repo
-      user_name = session[:user_name].downcase
+      #user_name = session[:user_name].downcase
       repo_name = "#{user_name}:my-first-code-commit-repo"
       repo_path = "data_store/#{repo_name}"
       repo = if Dir.exist?(repo_path)
@@ -70,6 +65,7 @@ class App < Sinatra::Base
                        sha256.hexdigest
                      end
       g.branch(branch_name)
+
       g.push
       redirect '/'
     end

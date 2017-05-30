@@ -1,0 +1,7 @@
+<h2>Edit</h2>
+
+
+<form #f="ngForm" (ngSubmit)="save(f.value, f.valid)">
+  <textarea name="article" [(ngModel)]="body" #article="ngModel"></textarea>
+  <button type="submit">Save</button>
+</form>
